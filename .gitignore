@@ -1,10 +1,56 @@
+# Environment files - MUST be ignored before any .env exists
 .env
-.venv/
-venv/
+.env.local
+.env.*.local
+
+# Python
 __pycache__/
-*.pyc
-node_modules/
-.next/
-backend/data/*
-!backend/data/.gitkeep
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+backend/venv/
+
+# Database
+backend/data/revflow.db
+backend/data/*.db
+backend/data/*.db-journal
+
+# Generated data files
+backend/data/synthetic_events.json
+backend/data/summary_metrics.json
+backend/data/classifier_metrics.json
+backend/data/audio/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Misc
+*.tmp
+*.temp
+.cache/

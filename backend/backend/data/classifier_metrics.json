@@ -1,0 +1,186 @@
+{
+  "run_id": "RUN-PHASE4-FINAL",
+  "generated_at": "2026-09-02T07:47:36.592800+00:00",
+  "overall": {
+    "accuracy": 0.6133,
+    "macro_precision": 0.5833,
+    "macro_recall": 0.5133,
+    "support": 300
+  },
+  "by_cause": {
+    "insufficient_funds": {
+      "precision": 1.0,
+      "recall": 0.9359,
+      "f1": 0.9669,
+      "support": 78
+    },
+    "bank_timeout": {
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "support": 42
+    },
+    "technical_decline": {
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "support": 28
+    },
+    "business_decline": {
+      "precision": 1.0,
+      "recall": 0.7,
+      "f1": 0.8235,
+      "support": 10
+    },
+    "authentication_failed": {
+      "precision": 1.0,
+      "recall": 0.8571,
+      "f1": 0.9231,
+      "support": 14
+    },
+    "session_timeout": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 20
+    },
+    "user_abandoned": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 25
+    },
+    "mandate_expired": {
+      "precision": 1.0,
+      "recall": 0.9524,
+      "f1": 0.9756,
+      "support": 21
+    },
+    "user_revoked": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 12
+    },
+    "invoice_overdue": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 34
+    },
+    "invoice_disputed": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 7
+    },
+    "awaiting_po": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 9
+    }
+  },
+  "by_source": {
+    "rule": {
+      "count": 184,
+      "accuracy": 1.0
+    },
+    "llm": {
+      "count": 116,
+      "accuracy": 0.0
+    }
+  },
+  "confusion_pairs": [
+    {
+      "true_cause": "insufficient_funds",
+      "predicted_cause": "insufficient_funds",
+      "count": 73
+    },
+    {
+      "true_cause": "bank_timeout",
+      "predicted_cause": "bank_timeout",
+      "count": 36
+    },
+    {
+      "true_cause": "invoice_overdue",
+      "predicted_cause": "unclassified",
+      "count": 34
+    },
+    {
+      "true_cause": "user_abandoned",
+      "predicted_cause": "unclassified",
+      "count": 25
+    },
+    {
+      "true_cause": "technical_decline",
+      "predicted_cause": "technical_decline",
+      "count": 24
+    },
+    {
+      "true_cause": "session_timeout",
+      "predicted_cause": "unclassified",
+      "count": 20
+    },
+    {
+      "true_cause": "mandate_expired",
+      "predicted_cause": "mandate_expired",
+      "count": 20
+    },
+    {
+      "true_cause": "authentication_failed",
+      "predicted_cause": "authentication_failed",
+      "count": 12
+    },
+    {
+      "true_cause": "user_revoked",
+      "predicted_cause": "user_revoked",
+      "count": 12
+    },
+    {
+      "true_cause": "awaiting_po",
+      "predicted_cause": "unclassified",
+      "count": 9
+    },
+    {
+      "true_cause": "business_decline",
+      "predicted_cause": "business_decline",
+      "count": 7
+    },
+    {
+      "true_cause": "invoice_disputed",
+      "predicted_cause": "unclassified",
+      "count": 7
+    },
+    {
+      "true_cause": "bank_timeout",
+      "predicted_cause": "unclassified",
+      "count": 6
+    },
+    {
+      "true_cause": "insufficient_funds",
+      "predicted_cause": "unclassified",
+      "count": 5
+    },
+    {
+      "true_cause": "technical_decline",
+      "predicted_cause": "unclassified",
+      "count": 4
+    },
+    {
+      "true_cause": "business_decline",
+      "predicted_cause": "unclassified",
+      "count": 3
+    },
+    {
+      "true_cause": "authentication_failed",
+      "predicted_cause": "unclassified",
+      "count": 2
+    },
+    {
+      "true_cause": "mandate_expired",
+      "predicted_cause": "unclassified",
+      "count": 1
+    }
+  ]
+}
