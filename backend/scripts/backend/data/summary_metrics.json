@@ -1,30 +1,30 @@
 {
-  "run_id": "RUN-20260901T120019",
-  "generated_at": "2026-09-03T17:01:39.724552+00:00",
+  "run_id": "RUN-20260904T132409",
+  "generated_at": "2026-09-04T13:24:24.733793+00:00",
   "random_seed": 42,
   "llm_mode": "live",
   "event_count": 300,
   "amounts_inr": {
     "at_risk": 6932929.36,
     "addressable": 144640.32,
-    "realised_recovered": 81779.72,
+    "realised_recovered": 59979.8,
     "simulated_outreach": 0.0,
-    "deferred": 4768261.24,
+    "deferred": 4387276.99,
     "withheld": 586510.88,
-    "escalated": 1433516.92
+    "escalated": 1814501.17
   },
   "rates": {
-    "recovery_rate_realised": 0.5654005743350126,
+    "recovery_rate_realised": 0.4146824343308975,
     "addressable_coverage": 0.0208628001944621,
-    "retry_success_rate": 0.4
+    "retry_success_rate": 0.325
   },
   "by_pipeline": {
     "checkout_dropoff": {
       "event_count": 150,
       "at_risk_inr": 739124.93,
       "addressable_inr": 119327.18,
-      "realised_recovered_inr": 81779.72,
-      "recovery_rate_realised": 0.6853402552545028
+      "realised_recovered_inr": 59979.8,
+      "recovery_rate_realised": 0.5026499411114886
     },
     "subscription_failure": {
       "event_count": 100,
@@ -43,13 +43,13 @@
   },
   "boundedness": {
     "withheld_count": 17,
-    "escalated_count": 29,
+    "escalated_count": 38,
     "deterministic_share": 1.0,
     "llm_call_count": 0,
     "llm_call_budget": 90,
     "out_of_bounds_action_count": 0,
     "missing_rationale_count": 0,
-    "p95_decision_latency_ms": 3
+    "p95_decision_latency_ms": 4
   },
   "integrity": {
     "false_positive_count": 0,
@@ -59,19 +59,19 @@
   },
   "action_breakdown": {
     "retry_now": 40,
-    "retry_later": 214,
+    "retry_later": 205,
     "nudge": 0,
-    "escalate_to_human": 29,
+    "escalate_to_human": 38,
     "stop": 17
   },
   "outcome_breakdown": {
-    "recovered": 16,
-    "failed": 9,
+    "recovered": 13,
+    "failed": 12,
     "api_error": 15,
     "simulated": 0,
-    "pending": 208,
+    "pending": 199,
     "paused": 6,
-    "escalated": 29,
+    "escalated": 38,
     "withheld": 17
   }
 }

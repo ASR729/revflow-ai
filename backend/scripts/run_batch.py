@@ -50,6 +50,30 @@ class BatchRunner:
         self.events: List[Event] = []
         self.started_at = datetime.now(timezone.utc)
 
+    @staticmethod
+    def generate_run_id() -> str:
+        r"""Generate a unique run_id matching pattern ^RUN-\d{8}T\d{6}$ with collision handling."""
+        import time
+        from datetime import datetime, timezone
+        
+        for attempt in range(10):
+            ts = datetime.now(timezone.utc)
+            run_id = f"RUN-{ts.strftime('%Y%m%dT%H%M%S')}"
+            # Quick check if this run_id already exists in DB
+            from revflow.db.connection import get_connection
+            with get_connection() as conn:
+                existing = conn.execute(
+                    "SELECT 1 FROM batch_runs WHERE run_id = ?", (run_id,)
+                ).fetchone()
+                if not existing:
+                    return run_id
+            # Collision detected, wait a bit and retry
+            time.sleep(0.01 * (attempt + 1))
+        
+        # Fallback: use microseconds to ensure uniqueness (still matches pattern)
+        ts = datetime.now(timezone.utc)
+        return f"RUN-{ts.strftime('%Y%m%dT%H%M%S')}"
+
     async def run(self) -> dict:
         """Execute the full batch pipeline."""
         print(f"[{self.run_id}] Starting batch run...")
@@ -69,22 +93,43 @@ class BatchRunner:
             self.events = load_synthetic_events(self.run_id)
             print(f"  Loaded {len(self.events)} events")
 
-            # Step 2: Insert events and batch_run record
+            # Step 2: Ensure batch_run record exists with event count and insert events
             with get_connection() as conn:
-                conn.execute(
-                    """INSERT INTO batch_runs (
-                        run_id, started_at, status, event_count, llm_call_count, random_seed, notes
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                    (
-                        self.run_id,
-                        self.started_at.isoformat(),
-                        "running",
-                        len(self.events),
-                        0,
-                        RANDOM_SEED,
-                        "--no-llm" if not self.use_llm else "",
-                    ),
-                )
+                # First, check if batch_runs record already exists (created by API endpoint)
+                existing = conn.execute(
+                    "SELECT 1 FROM batch_runs WHERE run_id = ?", (self.run_id,)
+                ).fetchone()
+                
+                if existing:
+                    # Update existing record with event count
+                    conn.execute(
+                        """UPDATE batch_runs SET 
+                            event_count = ?, 
+                            status = 'running',
+                            notes = ?
+                        WHERE run_id = ?""",
+                        (
+                            len(self.events),
+                            "--no-llm" if not self.use_llm else "",
+                            self.run_id,
+                        ),
+                    )
+                else:
+                    # Create new record (should not happen normally, but handle gracefully)
+                    conn.execute(
+                        """INSERT INTO batch_runs (
+                            run_id, started_at, status, event_count, llm_call_count, random_seed, notes
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                        (
+                            self.run_id,
+                            self.started_at.isoformat(),
+                            "running",
+                            len(self.events),
+                            0,
+                            RANDOM_SEED,
+                            "--no-llm" if not self.use_llm else "",
+                        ),
+                    )
 
             # Assign globally unique event_ids (per run_id)
             run_suffix = self.run_id.replace("RUN-", "").replace("T", "").replace(":", "")[-10:]

@@ -1,49 +1,49 @@
 {
-  "run_id": "RUN-20260901T120005",
-  "generated_at": "2026-09-03T06:11:54.841159+00:00",
+  "run_id": "RUN-20260904T153905",
+  "generated_at": "2026-09-04T22:52:24.874182+00:00",
   "random_seed": 42,
   "llm_mode": "live",
   "event_count": 300,
   "amounts_inr": {
-    "at_risk": 7511510.92,
-    "addressable": 136593.42,
-    "realised_recovered": 58830.39,
+    "at_risk": 6932929.36,
+    "addressable": 144640.32,
+    "realised_recovered": 59458.4,
     "simulated_outreach": 0.0,
-    "deferred": 4567918.29,
-    "withheld": 867359.01,
-    "escalated": 1939640.2
+    "deferred": 4387276.99,
+    "withheld": 586510.88,
+    "escalated": 1814501.17
   },
   "rates": {
-    "recovery_rate_realised": 0.4306971009291663,
-    "addressable_coverage": 0.01818454655192061,
-    "retry_success_rate": 0.2894736842105263
+    "recovery_rate_realised": 0.41107763035922484,
+    "addressable_coverage": 0.0208628001944621,
+    "retry_success_rate": 0.35
   },
   "by_pipeline": {
     "checkout_dropoff": {
       "event_count": 150,
       "at_risk_inr": 739124.93,
-      "addressable_inr": 111702.25,
-      "realised_recovered_inr": 58830.39,
-      "recovery_rate_realised": 0.5266714860264677
+      "addressable_inr": 119327.18,
+      "realised_recovered_inr": 59458.4,
+      "recovery_rate_realised": 0.4982804420585486
     },
     "subscription_failure": {
       "event_count": 100,
       "at_risk_inr": 251235.64,
-      "addressable_inr": 24891.17,
+      "addressable_inr": 25313.14,
       "realised_recovered_inr": 0.0,
       "recovery_rate_realised": 0.0
     },
     "b2b_receivable": {
       "event_count": 50,
-      "at_risk_inr": 6521150.35,
+      "at_risk_inr": 5942568.79,
       "addressable_inr": 0.0,
       "realised_recovered_inr": 0.0,
       "recovery_rate_realised": null
     }
   },
   "boundedness": {
-    "withheld_count": 19,
-    "escalated_count": 36,
+    "withheld_count": 17,
+    "escalated_count": 38,
     "deterministic_share": 1.0,
     "llm_call_count": 0,
     "llm_call_budget": 90,
@@ -58,20 +58,20 @@
     "over_retry_count": 0
   },
   "action_breakdown": {
-    "retry_now": 38,
-    "retry_later": 207,
+    "retry_now": 40,
+    "retry_later": 205,
     "nudge": 0,
-    "escalate_to_human": 36,
-    "stop": 19
+    "escalate_to_human": 38,
+    "stop": 17
   },
   "outcome_breakdown": {
-    "recovered": 11,
-    "failed": 13,
-    "api_error": 14,
+    "recovered": 14,
+    "failed": 11,
+    "api_error": 15,
     "simulated": 0,
-    "pending": 207,
-    "paused": 0,
-    "escalated": 36,
-    "withheld": 19
+    "pending": 199,
+    "paused": 6,
+    "escalated": 38,
+    "withheld": 17
   }
 }

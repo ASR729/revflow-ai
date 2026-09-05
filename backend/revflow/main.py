@@ -80,6 +80,14 @@ async def lifespan(app: FastAPI):
     missing = [k for k in required if not os.getenv(k)]
     if missing:
         raise RuntimeError(f"Missing required environment variables: {missing}")
+    
+    # Clean up stale "running" batch records from crashed processes
+    from revflow.db.connection import get_connection
+    with get_connection() as conn:
+        conn.execute(
+            "UPDATE batch_runs SET status = 'failed', notes = COALESCE(notes, '') || ' | Auto-marked failed on startup (stale running record)' WHERE status = 'running'"
+        )
+    
     yield
     # Shutdown (if needed)
 
@@ -148,9 +156,10 @@ async def run_batch(request: RunBatchRequest, background_tasks: BackgroundTasks)
     """
     from scripts.run_batch import BatchRunner
 
-    run_id = f"RUN-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S')}"
+    # Generate run_id matching pattern ^RUN-\d{8}T\d{6}$ with collision handling
+    run_id = BatchRunner.generate_run_id()
 
-    # Check for concurrent run
+    # Check for concurrent run (only truly active runs, not stale)
     from revflow.db.connection import get_connection
     with get_connection() as conn:
         running = conn.execute(
@@ -159,7 +168,7 @@ async def run_batch(request: RunBatchRequest, background_tasks: BackgroundTasks)
         if running:
             raise HTTPException(status_code=409, detail="A batch run is already in progress")
 
-    # Create batch_run record
+    # Create batch_run record with proper event_count (0 initially, updated by background task)
     with get_connection() as conn:
         conn.execute(
             """INSERT INTO batch_runs (run_id, started_at, status, event_count, llm_call_count, random_seed, notes)
@@ -168,7 +177,7 @@ async def run_batch(request: RunBatchRequest, background_tasks: BackgroundTasks)
                 run_id,
                 datetime.now(timezone.utc).isoformat(),
                 "running",
-                0,  # Will be updated after loading events
+                0,  # Will be updated by background task after loading events
                 0,
                 42,
                 "--no-llm" if not request.use_llm else "",
