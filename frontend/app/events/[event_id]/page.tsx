@@ -1,11 +1,11 @@
-import { Metadata } from 'next';
-import { EventDetailPage } from '@/components/event-detail';
+import type { Metadata } from 'next';
+import { EventDetailScreen } from '@/components/screens/event-detail';
 
 export const metadata: Metadata = {
-  title: 'Event Detail - RevFlow',
-  description: 'Event Detail - RevFlow AI Revenue Recovery',
+  title: 'Event Detail — RevFlow AI',
+  description: 'Event decision detail',
 };
 
 export default function Page({ params }: { params: { event_id: string } }) {
-  return <EventDetailPage eventId={params.event_id} />;
+  return <EventDetailScreen eventId={params.event_id} />;
 }

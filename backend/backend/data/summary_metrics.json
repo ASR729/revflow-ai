@@ -1,35 +1,35 @@
 {
-  "run_id": "RUN-20260904T153905",
-  "generated_at": "2026-09-04T22:52:24.874182+00:00",
+  "run_id": "RUN-20260905T145047",
+  "generated_at": "2026-09-05T14:50:55.709966+00:00",
   "random_seed": 42,
   "llm_mode": "live",
   "event_count": 300,
   "amounts_inr": {
     "at_risk": 6932929.36,
-    "addressable": 144640.32,
-    "realised_recovered": 59458.4,
+    "addressable": 149340.68,
+    "realised_recovered": 0.0,
     "simulated_outreach": 0.0,
-    "deferred": 4387276.99,
+    "deferred": 3529630.23,
     "withheld": 586510.88,
-    "escalated": 1814501.17
+    "escalated": 2667447.57
   },
   "rates": {
-    "recovery_rate_realised": 0.41107763035922484,
-    "addressable_coverage": 0.0208628001944621,
-    "retry_success_rate": 0.35
+    "recovery_rate_realised": 0.0,
+    "addressable_coverage": 0.021540776235458428,
+    "retry_success_rate": 0.0
   },
   "by_pipeline": {
     "checkout_dropoff": {
       "event_count": 150,
       "at_risk_inr": 739124.93,
       "addressable_inr": 119327.18,
-      "realised_recovered_inr": 59458.4,
-      "recovery_rate_realised": 0.4982804420585486
+      "realised_recovered_inr": 0.0,
+      "recovery_rate_realised": 0.0
     },
     "subscription_failure": {
       "event_count": 100,
       "at_risk_inr": 251235.64,
-      "addressable_inr": 25313.14,
+      "addressable_inr": 30013.5,
       "realised_recovered_inr": 0.0,
       "recovery_rate_realised": 0.0
     },
@@ -43,13 +43,13 @@
   },
   "boundedness": {
     "withheld_count": 17,
-    "escalated_count": 38,
+    "escalated_count": 50,
     "deterministic_share": 1.0,
     "llm_call_count": 0,
     "llm_call_budget": 90,
     "out_of_bounds_action_count": 0,
     "missing_rationale_count": 0,
-    "p95_decision_latency_ms": 4
+    "p95_decision_latency_ms": 0
   },
   "integrity": {
     "false_positive_count": 0,
@@ -58,20 +58,20 @@
     "over_retry_count": 0
   },
   "action_breakdown": {
-    "retry_now": 40,
-    "retry_later": 205,
+    "retry_now": 41,
+    "retry_later": 192,
     "nudge": 0,
-    "escalate_to_human": 38,
+    "escalate_to_human": 50,
     "stop": 17
   },
   "outcome_breakdown": {
-    "recovered": 14,
-    "failed": 11,
-    "api_error": 15,
+    "recovered": 0,
+    "failed": 0,
+    "api_error": 41,
     "simulated": 0,
-    "pending": 199,
+    "pending": 186,
     "paused": 6,
-    "escalated": 38,
+    "escalated": 50,
     "withheld": 17
   }
 }

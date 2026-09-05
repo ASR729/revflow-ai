@@ -72,7 +72,6 @@ interface EventRow {
   customer_id: string;
   decline_code: string | null;
   decline_message: string | null;
-  true_cause: string | null;
   retry_count: number;
   last_attempt_at: string | null;
   paused_until: string | null;
@@ -192,7 +191,6 @@ interface ClassifierMetricsResponse {
     llm: { count: number; accuracy: number };
   };
   confusion_pairs: Array<{
-    true_cause: string;
     predicted_cause: string;
     count: number;
   }>;
@@ -331,7 +329,8 @@ class APIClient {
   constructor(baseURL: string = '') {
     // In browser, use backend URL directly (CORS configured on backend for localhost:3000)
     // During SSR, use backend URL directly
-    this.baseURL = baseURL || 'http://localhost:8000';
+    const configured = process.env.NEXT_PUBLIC_API_BASE_URL;
+    this.baseURL = baseURL || (configured && configured.length > 0 ? configured : '/api');
     this.client = axios.create({
       baseURL: this.baseURL,
       timeout: 30000,

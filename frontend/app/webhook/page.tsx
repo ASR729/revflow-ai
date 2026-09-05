@@ -1,11 +1,11 @@
-import { Metadata } from 'next';
-import { WebhookPage } from '@/components/webhook';
+import type { Metadata } from 'next';
+import { WebhookScreen } from '@/components/screens/webhook';
 
 export const metadata: Metadata = {
-  title: 'Webhook - RevFlow',
-  description: 'Webhook - RevFlow AI Revenue Recovery',
+  title: 'Webhook — RevFlow AI',
+  description: 'Single-event ingestion',
 };
 
 export default function Page() {
-  return <WebhookPage />;
+  return <WebhookScreen />;
 }

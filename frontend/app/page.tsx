@@ -1,11 +1,11 @@
-import { Metadata } from 'next';
-import { Dashboard } from '@/components/dashboard';
+import type { Metadata } from 'next';
+import { OverviewScreen } from '@/components/screens/overview';
 
 export const metadata: Metadata = {
-  title: 'RevFlow - AI Revenue Recovery',
-  description: 'AI-Powered Revenue Recovery Orchestration',
+  title: 'Overview — RevFlow AI',
+  description: 'RevFlow AI overview',
 };
 
 export default function Page() {
-  return <Dashboard />;
+  return <OverviewScreen />;
 }

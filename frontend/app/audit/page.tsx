@@ -1,11 +1,11 @@
-import { Metadata } from 'next';
-import { AuditPage } from '@/components/audit';
+import type { Metadata } from 'next';
+import { AuditScreen } from '@/components/screens/audit';
 
 export const metadata: Metadata = {
-  title: 'Audit Trail - RevFlow',
-  description: 'Audit Trail - RevFlow AI Revenue Recovery',
+  title: 'Audit Trail — RevFlow AI',
+  description: 'Decision audit trail',
 };
 
 export default function Page() {
-  return <AuditPage />;
+  return <AuditScreen />;
 }

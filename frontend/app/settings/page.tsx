@@ -1,11 +1,11 @@
-import { Metadata } from 'next';
-import { SettingsPage } from '@/components/settings';
+import type { Metadata } from 'next';
+import { SettingsScreen } from '@/components/screens/settings';
 
 export const metadata: Metadata = {
-  title: 'Settings - RevFlow',
-  description: 'Settings - RevFlow AI Revenue Recovery',
+  title: 'Settings — RevFlow AI',
+  description: 'Environment settings (read-only)',
 };
 
 export default function Page() {
-  return <SettingsPage />;
+  return <SettingsScreen />;
 }
