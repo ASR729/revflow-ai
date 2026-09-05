@@ -54,3 +54,4 @@ htmlcov/
 *.tmp
 *.temp
 .cache/
+.ideavo/project
