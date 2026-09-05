@@ -143,6 +143,32 @@ function OverviewBody({
         />
       </div>
 
+      <CardSection
+        title="How the agent decided"
+        subtitle="Ingestion → classification → policy ceiling → execution → audit. Every stage is logged."
+      >
+        <ol className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+          {(
+            [
+              ['Ingested', formatCount(m.event_count)],
+              ['Decided deterministically', formatRate(m.boundedness.deterministic_share)],
+              ['Ceiling breaches', formatCount(m.boundedness.out_of_bounds_action_count)],
+              ['LLM budget used', `${formatCount(m.boundedness.llm_call_count)} / ${formatCount(m.boundedness.llm_call_budget)}`],
+              ['Audited rows', formatCount(m.event_count)],
+            ] as const
+          ).map(([step, value]) => (
+            <li key={step} className="rounded-card border border-edge bg-canvas p-3 text-center">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted">{step}</p>
+              <p className="mt-1 text-sm font-semibold tabular-nums text-ink">{value}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-3 text-xs text-muted">
+          Mode: {m.llm_mode}. The agent ran with a fixed policy ceiling; nothing was retried beyond the cap and every
+          decision carries a written rationale in the Audit Trail.
+        </p>
+      </CardSection>
+
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <CardSection title="Recovery by pipeline" subtitle="Realised recovery rate per event type">
           <div className="space-y-5">
